@@ -48,8 +48,8 @@ vector<string> solution(vector<vector<string>> tickets) {
  
 void print(vector<vector<string>> tickets, vector<string> answer) {
     vector<string> t = solution(tickets);
-    if (t == answer)        cout << "정답" << endl;
-    else        cout << "틀림" << endl;
+    if (t == answer)        cout << "Correct" << endl;
+    else        cout << "Wrong Answer" << endl;
     answerlist.clear();
 }
  
