@@ -7,53 +7,53 @@ using namespace std;
 vector<vector<string>> answerlist;
  
 void dfs(vector<vector<string>>& tickets, vector<pair<int, int>>& useCheck, string from, int count) {
-    //¸®ÅÏÁ¶°Ç Æ¼ÄÏÀ» ¸ğµÎ´Ù »ç¿ëÇß´Ù¸é
+    //ë¦¬í„´ì¡°ê±´ í‹°ì¼“ì„ ëª¨ë‘ë‹¤ ì‚¬ìš©í–ˆë‹¤ë©´
     if (count == tickets.size()) {
-        //Á¤´äÈÄº¸ »ı¼º
+        //ì •ë‹µí›„ë³´ ìƒì„±
         vector<string> answer;
-        //±âÁ¸ ³»¿ëÀÌ ¹Ù²î¸é ¾ÈµÇ±â¶§¹®¿¡ ÀÓ½Ã·Î ÇÏ³ª »ı¼º ÈÄ Á¤·Ä
+        //ê¸°ì¡´ ë‚´ìš©ì´ ë°”ë€Œë©´ ì•ˆë˜ê¸°ë•Œë¬¸ì— ì„ì‹œë¡œ í•˜ë‚˜ ìƒì„± í›„ ì •ë ¬
         vector<pair<int, int>> temp = useCheck;
         sort(temp.begin(), temp.end());
-        //¼ø¼­´ë·Î Á¤´ä¿¡Ãß°¡
+        //ìˆœì„œëŒ€ë¡œ ì •ë‹µì—ì¶”ê°€
         for (auto a : temp)        answer.push_back(tickets[a.second][0]);
-        //¸¶Áö¸· Çà¼ºÁö´Â µû·Î Ãß°¡ÇØÁÜ
+        //ë§ˆì§€ë§‰ í–‰ì„±ì§€ëŠ” ë”°ë¡œ ì¶”ê°€í•´ì¤Œ
         answer.push_back(tickets[temp[temp.size() - 1].second][1]);
-        //Á¤´ä¸®½ºÆ®¿¡ Ãß°¡ÇÏ°í ¸®ÅÏ
+        //ì •ë‹µë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€í•˜ê³  ë¦¬í„´
         answerlist.push_back(answer);
         return;
     }
     for (int i = 0; i < tickets.size(); i++) {
-        //»ç¿ëÀ» ¾ÈÇÑÆ¼ÄÏÀÌ°í Çà¼±Áö°¡ °°À»¶§
+        //ì‚¬ìš©ì„ ì•ˆí•œí‹°ì¼“ì´ê³  í–‰ì„ ì§€ê°€ ê°™ì„ë•Œ
         if (useCheck[i].second == -1 && tickets[i][0] == from) {
-            //»ç¿ëÇß´Ù°í º¯°æÇÏ°í
+            //ì‚¬ìš©í–ˆë‹¤ê³  ë³€ê²½í•˜ê³ 
             useCheck[i] = { count, i };
-            //Àç±ÍÇÔ
+            //ì¬ê·€í•¨
             dfs(tickets, useCheck, tickets[i][1], count + 1);
-            //»ç¿ëÀ» ´ÙÇßÀ¸¸é »ç¿ëÇß´Ù´Â ³»¿ë »èÁ¦
+            //ì‚¬ìš©ì„ ë‹¤í–ˆìœ¼ë©´ ì‚¬ìš©í–ˆë‹¤ëŠ” ë‚´ìš© ì‚­ì œ
             useCheck[i] = { 0, -1 };
         }
     }
 }
  
 vector<string> solution(vector<vector<string>> tickets) {
-    //»ç¿ë¿©ºÎ¸¦ °ü¸®ÇÒ ÀÓ½Ãº¯¼ö (¼ø¼­, ÀÎµ¦½º¹øÈ£)
+    //ì‚¬ìš©ì—¬ë¶€ë¥¼ ê´€ë¦¬í•  ì„ì‹œë³€ìˆ˜ (ìˆœì„œ, ì¸ë±ìŠ¤ë²ˆí˜¸)
     vector<pair<int, int>> useCheck(tickets.size(), { 0 , -1 });
-    //Ã³À½Àº ICN¿¡¼­ Ãâ¹ßÇØ¾ß ÇÑ´Ù.
+    //ì²˜ìŒì€ ICNì—ì„œ ì¶œë°œí•´ì•¼ í•œë‹¤.
     dfs(tickets, useCheck, "ICN", 0);
-    //¾ËÆÄºª ¼øÀ¸·Î ¹İÈ¯ÇØ¾ß ÇÏ±â¶§¹®¿¡ Á¤·Ä
+    //ì•ŒíŒŒë²³ ìˆœìœ¼ë¡œ ë°˜í™˜í•´ì•¼ í•˜ê¸°ë•Œë¬¸ì— ì •ë ¬
     sort(answerlist.begin(), answerlist.end());
-    //Á¦ÀÏ ¾Õ¿¡ÀÖ´Â°ÍÀÌ ¾ËÆÄºª ¼øÀ¸·Î Á¤·ÄµÈ °ÍÀÌ´Ù.
+    //ì œì¼ ì•ì—ìˆëŠ”ê²ƒì´ ì•ŒíŒŒë²³ ìˆœìœ¼ë¡œ ì •ë ¬ëœ ê²ƒì´ë‹¤.
     return answerlist[0];
 }
  
 void print(vector<vector<string>> tickets, vector<string> answer) {
     vector<string> t = solution(tickets);
-    if (t == answer)        cout << "Á¤´ä" << endl;
-    else        cout << "Æ²¸²" << endl;
+    if (t == answer)        cout << "ì •ë‹µ" << endl;
+    else        cout << "í‹€ë¦¼" << endl;
     answerlist.clear();
 }
  
-int main(void) {
+int main() {
     print({ {"ICN","JFK"}, {"HND", "IAD"}, {"JFK", "HND"} }, { "ICN", "JFK", "HND", "IAD" });
     print({ {"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL", "SFO"} }, { "ICN", "ATL", "ICN", "SFO", "ATL", "SFO" });
     return 0;
