@@ -11,7 +11,6 @@ void dfs(vector<vector<string>>& tickets, vector<pair<int, int>>& useCheck, stri
         vector<string> answer;
         vector<pair<int, int>> temp = useCheck;
         sort(temp.begin(), temp.end());
-        //순서대로 정답에추가
         for (auto a : temp)        answer.push_back(tickets[a.second][0]);
         //마지막 행성지는 따로 추가해줌
         answer.push_back(tickets[temp[temp.size() - 1].second][1]);
