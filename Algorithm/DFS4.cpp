@@ -9,7 +9,6 @@ vector<vector<string>> answerlist;
 void dfs(vector<vector<string>>& tickets, vector<pair<int, int>>& useCheck, string from, int count) {
     if (count == tickets.size()) {
         vector<string> answer;
-        //기존 내용이 바뀌면 안되기때문에 임시로 하나 생성 후 정렬
         vector<pair<int, int>> temp = useCheck;
         sort(temp.begin(), temp.end());
         //순서대로 정답에추가
