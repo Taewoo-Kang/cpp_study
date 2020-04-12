@@ -7,7 +7,6 @@ using namespace std;
 vector<vector<string>> answerlist;
  
 void dfs(vector<vector<string>>& tickets, vector<pair<int, int>>& useCheck, string from, int count) {
-    //리턴조건 티켓을 모두다 사용했다면
     if (count == tickets.size()) {
         //정답후보 생성
         vector<string> answer;
