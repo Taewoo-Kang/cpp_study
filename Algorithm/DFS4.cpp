@@ -17,7 +17,6 @@ void dfs(vector<vector<string>>& tickets, vector<pair<int, int>>& useCheck, stri
         return;
     }
     for (int i = 0; i < tickets.size(); i++) {
-        //사용을 안한티켓이고 행선지가 같을때
         if (useCheck[i].second == -1 && tickets[i][0] == from) {
             //사용했다고 변경하고
             useCheck[i] = { count, i };
